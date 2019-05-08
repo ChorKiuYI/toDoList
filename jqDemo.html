@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用JQ来实现todolist</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <input id="input" type="text">
+        <button id="submitBtn">提交</button>
+        <ol id="list"></ol>
+    </div>
+</body>
+<script>
+
+    function Page() {
+
+    }
+    // 添加新的函数
+    $.extend(Page.prototype, {
+        init: function () {
+            this.bindEvents()
+        },
+        bindEvents: function () {
+            var btn = $('#submitBtn')
+            btn.on('click', $.proxy(this.handleBtnClick, this))
+        },
+        handleBtnClick: function () {
+            var inputElem = $('#input')
+            var inputValue = $('#input').val()
+            var olElem = $('#list')
+            olElem.append('<li>' + inputValue + '</li>')
+            inputElem.val('')
+        }
+    })
+
+    var page = new Page();
+    page.init()
+</script>
+
+</html>
